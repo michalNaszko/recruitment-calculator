@@ -3,7 +3,6 @@
 namespace App\Tests\Unit\Calculator;
 
 use App\Utils\Calculator;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class CalculatorTest extends TestCase
@@ -87,5 +86,32 @@ class CalculatorTest extends TestCase
         self::assertEquals(null, Calculator::multiply("__", 100.431));
         self::assertEquals(null, Calculator::multiply(12.2, "asd"));
         self::assertEquals(null, Calculator::multiply("12.2", "_100.431"));
+    }
+
+    public function testDivide() : void
+    {
+        // Only integers
+        self::assertEquals(2, Calculator::divide(2, 1));
+        self::assertEquals(4, Calculator::divide(100, 25));
+
+        // One argument int and other float
+        self::assertEquals(2.35, Calculator::divide(23.5, 10));
+        self::assertEquals(2, Calculator::divide(15, 7.5));
+
+        // Only floats
+        self::assertEquals(4.25, Calculator::divide(10.5, 2.5));
+        self::assertEquals(5, Calculator::divide(2.5, 0.5));
+
+        // Numeric string
+        self::assertEquals(2, Calculator::divide("4", "2"));
+        self::assertEquals(0.05, Calculator::divide("0.5", 10));
+        self::assertEquals(0.2, Calculator::divide(2, "10"));
+        self::assertEquals(3, Calculator::divide("7.5", "2.5"));
+
+        // Not numeric inout data
+        self::assertEquals(null, Calculator::divide("12a", "13"));
+        self::assertEquals(null, Calculator::divide("__", 100.431));
+        self::assertEquals(null, Calculator::divide(12.2, "asd"));
+        self::assertEquals(null, Calculator::divide("12.2", "_100.431"));
     }
 }
