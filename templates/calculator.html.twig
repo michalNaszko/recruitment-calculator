@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <style>
+        .result {
+            width: 5em;
+        }
+    </style>
+{% endblock %}
 {% block body %}
 
     <div class="row d-flex align-items-center justify-content-center">
 
         <!--Grid column-->
         <div class="col-md-6">
-
+            <h1 style="text-align:center">Calculator</h1>
             <table class="table table-dark align-middle">
                 <tbody>
                 <tr>
@@ -13,28 +20,28 @@
                     <td>+</td>
                     <td><textarea class="form-control" id="add2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td></td>
+                    <td class="result" id="resAdd"></td>
                 </tr>
                 <tr>
                     <td><textarea class="form-control" id="subtract1" rows="1"></textarea></td>
                     <td>-</td>
                     <td><textarea class="form-control" id="subtract2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td></td>
+                    <td class="result" id="resSub"></td>
                 </tr>
                 <tr>
                     <td><textarea class="form-control" id="multiply1" rows="1"></textarea></td>
                     <td>*</td>
                     <td><textarea class="form-control" id="multiply2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td></td>
+                    <td class="result" id="resMul"></td>
                 </tr>
                 <tr>
                     <td><textarea class="form-control" id="divide1" rows="1"></textarea></td>
                     <td>/</td>
                     <td><textarea class="form-control" id="divide2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td></td>
+                    <td class="result" id="resDiv"></td>
                 </tr>
                 </tbody>
             </table>
