@@ -61,4 +61,31 @@ class CalculatorTest extends TestCase
         self::assertEquals(null, Calculator::subtract(12.2, "asd"));
         self::assertEquals(null, Calculator::subtract("12.2", "_100.431"));
     }
+
+    public function testMultiply() : void
+    {
+        // Only integers
+        self::assertEquals(2, Calculator::multiply(1, 2));
+        self::assertEquals(53000, Calculator::multiply(100, 53));
+
+        // One argument int and other float
+        self::assertEquals(235, Calculator::multiply(23.5, 10));
+        self::assertEquals(307.5, Calculator::multiply(15, 20.5));
+
+        // Only floats
+        self::assertEquals(26.25, Calculator::multiply(10.5, 2.5));
+        self::assertEquals(1.05, Calculator::multiply(0.5, 2.1));
+
+        // Numeric string
+        self::assertEquals(8, Calculator::multiply("4", "2"));
+        self::assertEquals(5, Calculator::multiply("0.5", 10));
+        self::assertEquals(20.2, Calculator::multiply(2, "10.1"));
+        self::assertEquals(18.75, Calculator::multiply("7.5", "2.5"));
+
+        // Not numeric inout data
+        self::assertEquals(null, Calculator::multiply("12a", "13"));
+        self::assertEquals(null, Calculator::multiply("__", 100.431));
+        self::assertEquals(null, Calculator::multiply(12.2, "asd"));
+        self::assertEquals(null, Calculator::multiply("12.2", "_100.431"));
+    }
 }
