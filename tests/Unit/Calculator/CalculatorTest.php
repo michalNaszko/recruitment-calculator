@@ -21,5 +21,18 @@ class CalculatorTest extends TestCase
         // Only floats
         self::assertEquals(13, Calculator::add(10.5, 2.5));
         self::assertEquals(112.631, Calculator::add(12.2, 100.431));
+
+        // Numeric string
+        self::assertEquals(15, Calculator::add("12", "13"));
+        self::assertEquals(112.631, Calculator::add("12.2", 100.431));
+        self::assertEquals(112.631, Calculator::add(12.2, "100.431"));
+        self::assertEquals(112.631, Calculator::add("12.2", "100.431"));
+
+        // Not numeric inout data
+        // Numeric string
+        self::assertEquals(null, Calculator::add("12a", "13"));
+        self::assertEquals(null, Calculator::add("__", 100.431));
+        self::assertEquals(null, Calculator::add(12.2, "asd"));
+        self::assertEquals(null, Calculator::add("12.2", "_100.431"));
     }
 }
