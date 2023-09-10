@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+    <script src="js/calculator.js"></script>
+{% endblock %}
 {% block stylesheets %}
     <style>
         .result {
@@ -20,28 +23,28 @@
                     <td>+</td>
                     <td><textarea class="form-control" id="add2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td class="result" id="resAdd"></td>
+                    <td class="result" id="resAdd">{{ result }}</td>
                 </tr>
                 <tr>
                     <td><textarea class="form-control" id="subtract1" rows="1"></textarea></td>
                     <td>-</td>
                     <td><textarea class="form-control" id="subtract2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td class="result" id="resSub"></td>
+                    <td class="result" id="resSub">{{ result }}</td>
                 </tr>
                 <tr>
                     <td><textarea class="form-control" id="multiply1" rows="1"></textarea></td>
                     <td>*</td>
                     <td><textarea class="form-control" id="multiply2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td class="result" id="resMul"></td>
+                    <td class="result" id="resMul">{{ result }}</td>
                 </tr>
                 <tr>
                     <td><textarea class="form-control" id="divide1" rows="1"></textarea></td>
                     <td>/</td>
                     <td><textarea class="form-control" id="divide2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td class="result" id="resDiv"></td>
+                    <td class="result" id="resDiv">{{ result }}</td>
                 </tr>
                 </tbody>
             </table>
