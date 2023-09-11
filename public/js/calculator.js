@@ -7,5 +7,4 @@ $(document).ready(function(){
             alert("text area with id: " + $(this).attr('id') + "is numeric");
         }
     });
-
 });

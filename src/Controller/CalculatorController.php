@@ -23,10 +23,6 @@ class CalculatorController extends AbstractController
      */
     public function calculator(string $numA, string $operation, string $numB): Response
     {
-        echo $numA . "<br/>";
-        echo $operation . "<br/>";
-        echo $numB . "<br/>";
-        echo $this->executeOperation($numA, $operation, $numB) . "<br/>";
         return $this->render('calculator.html.twig', [
             "result" => $this->executeOperation($numA, $operation, $numB)
         ]);

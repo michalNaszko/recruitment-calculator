@@ -1,15 +1,35 @@
 {% extends 'base.html.twig' %}
 {% block javascripts %}
     <script src="js/calculator.js"></script>
+    <script>
+        function operationChosen(element) {
+            var dropDonwMenuBackup = $("#dropdownMenuButton1").text();
+            console.log(element);
+            $("#dropdownMenuButton1").text($(element).text());
+            $(element).text(dropDonwMenuBackup);
+            $(".dropdown-menu").dropdown('update');
+        }
+    </script>
 {% endblock %}
 {% block stylesheets %}
     <style>
         .result {
             width: 5em;
         }
+
+        .dropdown {
+            background: white;
+            border-radius: 5px;
+        }
     </style>
 {% endblock %}
+
 {% block body %}
+
+    {% set _result = " " %}
+    {% if result is defined  %}
+        {% set _result = result %}
+    {% endif %}
 
     <div class="row d-flex align-items-center justify-content-center">
 
@@ -19,32 +39,22 @@
             <table class="table table-dark align-middle">
                 <tbody>
                 <tr>
-                    <td><textarea class="form-control" id="add1" rows="1"></textarea></td>
-                    <td>+</td>
-                    <td><textarea class="form-control" id="add2" rows="1"></textarea></td>
+                    <td><textarea class="form-control" id="operand1" rows="1"></textarea></td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                +
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="" onclick='operationChosen(this)'>-</a></li>
+                                <li><a class="dropdown-item" href="" onclick='operationChosen(this)'>*</a></li>
+                                <li><a class="dropdown-item" href="" onclick='operationChosen(this)'>/</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td><textarea class="form-control" id="operand2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td class="result" id="resAdd">{{ result }}</td>
-                </tr>
-                <tr>
-                    <td><textarea class="form-control" id="subtract1" rows="1"></textarea></td>
-                    <td>-</td>
-                    <td><textarea class="form-control" id="subtract2" rows="1"></textarea></td>
-                    <td>=</td>
-                    <td class="result" id="resSub">{{ result }}</td>
-                </tr>
-                <tr>
-                    <td><textarea class="form-control" id="multiply1" rows="1"></textarea></td>
-                    <td>*</td>
-                    <td><textarea class="form-control" id="multiply2" rows="1"></textarea></td>
-                    <td>=</td>
-                    <td class="result" id="resMul">{{ result }}</td>
-                </tr>
-                <tr>
-                    <td><textarea class="form-control" id="divide1" rows="1"></textarea></td>
-                    <td>/</td>
-                    <td><textarea class="form-control" id="divide2" rows="1"></textarea></td>
-                    <td>=</td>
-                    <td class="result" id="resDiv">{{ result }}</td>
+                    <td class="result" id="resAdd">{{ _result }}</td>
                 </tr>
                 </tbody>
             </table>
