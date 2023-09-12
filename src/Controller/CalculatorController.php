@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Utils\Calculator;
+use App\Service\Calculator;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,7 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CalculatorController extends AbstractController
 {
-    /**
+    private $logger;
+    private $calculator;
+    public function __construct(LoggerInterface $logger, Calculator $calculator)
+    {
+        $this->logger = $logger;
+        $this->calculator = $calculator;
+    }
+
+        /**
      * @Route("/", name="app_calculator")
      */
     public function index(): Response
@@ -23,9 +31,9 @@ class CalculatorController extends AbstractController
      * @Route("/{numA}/{operation}/{numB}", name="calculation",
      *     requirements={"numA"="^\d+(?:\.\d+)?$", "operation"="\+|-|\*|:", "numB"="^\d+(?:\.\d+)?$"})
      */
-    public function calculator(string $numA, string $operation, string $numB, LoggerInterface $logger): JsonResponse
+    public function calculator(string $numA, string $operation, string $numB): JsonResponse
     {
-        $logger->info('Received request to calculate: ' . $numA . $operation . $numB);
+        $this->logger->info('Received request to calculate: ' . $numA . $operation . $numB);
         return new JsonResponse(['result' => $this->executeOperation($numA, $operation, $numB)]);
     }
 
@@ -33,13 +41,13 @@ class CalculatorController extends AbstractController
     {
         switch ($operation) {
             case "+":
-                return Calculator::add($numA, $numB);
+                return $this->calculator->add($numA, $numB);
             case "-":
-                return Calculator::subtract($numA, $numB);
+                return $this->calculator->subtract($numA, $numB);
             case "*":
-                return Calculator::multiply($numA, $numB);
+                return $this->calculator->multiply($numA, $numB);
             case ":":
-                return Calculator::divide($numA, $numB);
+                return $this->calculator->divide($numA, $numB);
             default:
                 return null;
         }

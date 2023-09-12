@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Calculator;
 
-use App\Utils\Calculator;
+use App\Service\Calculator;
 use PHPUnit\Framework\TestCase;
 
 class CalculatorTest extends TestCase
