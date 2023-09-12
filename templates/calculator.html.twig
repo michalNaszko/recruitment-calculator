@@ -1,16 +1,4 @@
 {% extends 'base.html.twig' %}
-{% block javascripts %}
-    <script src="js/calculator.js"></script>
-    <script>
-        function operationChosen(element) {
-            var dropDonwMenuBackup = $("#dropdownMenuButton1").text();
-            console.log(element);
-            $("#dropdownMenuButton1").text($(element).text());
-            $(element).text(dropDonwMenuBackup);
-            $(".dropdown-menu").dropdown('update');
-        }
-    </script>
-{% endblock %}
 {% block stylesheets %}
     <style>
         .result {
@@ -41,20 +29,16 @@
                 <tr>
                     <td><textarea class="form-control" id="operand1" rows="1"></textarea></td>
                     <td>
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                +
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="" onclick='operationChosen(this)'>-</a></li>
-                                <li><a class="dropdown-item" href="" onclick='operationChosen(this)'>*</a></li>
-                                <li><a class="dropdown-item" href="" onclick='operationChosen(this)'>/</a></li>
-                            </ul>
-                        </div>
+                        <select class="form-select" aria-label="Operation" id="operation">
+                            <option selected>+</option>
+                            <option value="1">-</option>
+                            <option value="2">*</option>
+                            <option value="3">:</option>
+                        </select>
                     </td>
                     <td><textarea class="form-control" id="operand2" rows="1"></textarea></td>
                     <td>=</td>
-                    <td class="result" id="resAdd">{{ _result }}</td>
+                    <td id="result"></td>
                 </tr>
                 </tbody>
             </table>
@@ -63,5 +47,9 @@
         <!--Grid column-->
 
     </div>
+
+    {% block javascripts %}
+        <script src="js/calculator.js"></script>
+    {% endblock %}
 
 {% endblock %}
