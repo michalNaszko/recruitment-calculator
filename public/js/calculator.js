@@ -39,16 +39,11 @@ window.onload = function() {
             .done(function( response ) {
                 let result = document.getElementById("result");
                 result.textContent = response["result"];
-                // alert( "Data Saved: " + response["result"] );
             });
     }
 
-    let cnt = 0;
     function calculate() {
-        cnt++;
-        console.log(`Inside calculate ${cnt}`);
         if(validateOperands()) {
-            console.log(`Operands are valid!`);
             calculateRequest();
         }
     }
@@ -80,7 +75,6 @@ window.onload = function() {
     let dropdownItems = document.getElementsByClassName("dropdown-item");
 
     for (let i = 0; i < dropdownItems.length; i++) {
-        console.log("adding listener: " + i);
         dropdownItems[i].addEventListener(
             'click',
             debounce(() => {
