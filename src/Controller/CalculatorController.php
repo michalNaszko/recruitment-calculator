@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Utils\Calculator;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,8 +23,9 @@ class CalculatorController extends AbstractController
      * @Route("/{numA}/{operation}/{numB}", name="calculation",
      *     requirements={"numA"="^\d+(?:\.\d+)?$", "operation"="\+|-|\*|:", "numB"="^\d+(?:\.\d+)?$"})
      */
-    public function calculator(string $numA, string $operation, string $numB): JsonResponse
+    public function calculator(string $numA, string $operation, string $numB, LoggerInterface $logger): JsonResponse
     {
+        $logger->info('Received request to calculate: ' . $numA . $operation . $numB);
         return new JsonResponse(['result' => $this->executeOperation($numA, $operation, $numB)]);
     }
 
